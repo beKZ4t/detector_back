@@ -1,6 +1,6 @@
-package kz.iitu.detector.domain.data.repository;
+package kz.iitu.detector.domain.word.repository;
 
-import kz.iitu.detector.domain.data.model.Words;
+import kz.iitu.detector.domain.word.model.Words;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package kz.iitu.detector.domain.data.model;
+package kz.iitu.detector.domain.word.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
