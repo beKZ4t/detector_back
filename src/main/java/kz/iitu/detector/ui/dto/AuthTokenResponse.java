@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class AuthTokenResponse {
 
+
+
     private String token;
 
 }
