@@ -1,4 +1,4 @@
-package kz.iitu.detector.domain.purchase;
+package kz.iitu.detector.domain.purchase.model;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;

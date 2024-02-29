@@ -1,5 +1,6 @@
-package kz.iitu.detector.domain.user;
+package kz.iitu.detector.domain.user.repository;
 
+import kz.iitu.detector.domain.user.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

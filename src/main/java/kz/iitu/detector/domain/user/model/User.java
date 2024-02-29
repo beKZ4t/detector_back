@@ -1,4 +1,4 @@
-package kz.iitu.detector.domain.user;
+package kz.iitu.detector.domain.user.model;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;

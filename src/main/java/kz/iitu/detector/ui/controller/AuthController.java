@@ -1,6 +1,6 @@
 package kz.iitu.detector.ui.controller;
 
-import kz.iitu.detector.domain.user.UserService;
+import kz.iitu.detector.domain.user.service.UserService;
 import kz.iitu.detector.ui.dto.LoginRequest;
 import kz.iitu.detector.ui.dto.UserDataRequest;
 import org.springframework.http.ResponseEntity;

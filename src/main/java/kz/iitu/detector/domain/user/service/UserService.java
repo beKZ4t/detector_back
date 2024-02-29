@@ -1,5 +1,7 @@
-package kz.iitu.detector.domain.user;
+package kz.iitu.detector.domain.user.service;
 
+import kz.iitu.detector.domain.user.model.User;
+import kz.iitu.detector.domain.user.repository.UserRepository;
 import kz.iitu.detector.ui.dto.AuthTokenResponse;
 import kz.iitu.detector.ui.dto.LoginRequest;
 import kz.iitu.detector.ui.dto.UserDataRequest;
