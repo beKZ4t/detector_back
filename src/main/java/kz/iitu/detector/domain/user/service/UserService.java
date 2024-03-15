@@ -27,7 +27,7 @@ public class UserService {
             return ResponseEntity.badRequest().body("Email not registered");
         }
         User user = userOptional.get();
-        if (user.getPassword().equals(loginRequest.getPassword())) {
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
             return ResponseEntity.badRequest().body("Wrong password");
         }
         user.setToken(TokenUtils.generateUserToken(user.getEmail(), user.getPassword()));
@@ -40,7 +40,14 @@ public class UserService {
         if (userOptional.isPresent()) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
-        User user = repository.save(new User(userDataRequest.getUsername(), userDataRequest.getEmail(), userDataRequest.getPassword(), TokenUtils.generateUserToken(userDataRequest.getEmail(), userDataRequest.getPassword())));
+        User user = repository.save(
+                new User(
+                    userDataRequest.getUsername(),
+                    userDataRequest.getEmail(),
+                    userDataRequest.getPassword(),
+                    TokenUtils.generateUserToken(userDataRequest.getEmail(), userDataRequest.getPassword())
+                )
+        );
         return ResponseEntity.ok(new AuthTokenResponse(user.getToken()));
     }
 

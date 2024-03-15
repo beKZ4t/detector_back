@@ -20,6 +20,7 @@ public class Detect {
     private Long id;
     private Long userId;
     private Long time;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private Integer ai;
     private Integer human;
