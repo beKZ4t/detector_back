@@ -1,5 +1,6 @@
 package kz.iitu.detector.domain.user.service;
 
+import kz.iitu.detector.config.jwt.TokenUtils;
 import kz.iitu.detector.domain.user.model.User;
 import kz.iitu.detector.domain.user.repository.UserRepository;
 import kz.iitu.detector.ui.dto.AuthTokenResponse;
@@ -29,7 +30,7 @@ public class UserService {
         if (user.getPassword().equals(loginRequest.getPassword())) {
             return ResponseEntity.badRequest().body("Wrong password");
         }
-        user.setToken(generateToken(user.getEmail(), user.getPassword()));
+        user.setToken(TokenUtils.generateUserToken(user.getEmail(), user.getPassword()));
         repository.save(user);
         return ResponseEntity.ok(new AuthTokenResponse(user.getToken()));
     }
@@ -39,31 +40,19 @@ public class UserService {
         if (userOptional.isPresent()) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
-        User user = repository.save(new User(userDataRequest.getUsername(), userDataRequest.getEmail(), userDataRequest.getPassword(), generateToken(userDataRequest.getEmail(), userDataRequest.getPassword())));
+        User user = repository.save(new User(userDataRequest.getUsername(), userDataRequest.getEmail(), userDataRequest.getPassword(), TokenUtils.generateUserToken(userDataRequest.getEmail(), userDataRequest.getPassword())));
         return ResponseEntity.ok(new AuthTokenResponse(user.getToken()));
     }
 
-    public ResponseEntity<?> getProfile(String token) {
-        Optional<User> userOptional = repository.findByToken(token);
-        if (userOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
-        }
-        return ResponseEntity.ok(userOptional.get());
+    public ResponseEntity<?> getProfile(User user) {
+        return ResponseEntity.ok(user);
     }
 
-    public ResponseEntity<?> changeProfile(String token, UserDataRequest userDataRequest) {
-        Optional<User> userOptional = repository.findByToken(token);
-        if (userOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
-        }
-        User user = userOptional.get();
+    public ResponseEntity<?> changeProfile(User user, UserDataRequest userDataRequest) {
         user.setUsername(userDataRequest.getUsername());
         user.setPassword(userDataRequest.getPassword());
-        user.setToken(generateToken(user.getEmail(), user.getPassword()));
+        user.setToken(TokenUtils.generateUserToken(user.getEmail(), user.getPassword()));
         return ResponseEntity.ok(new AuthTokenResponse(user.getToken()));
     }
 
-    private String generateToken(String email, String password) {
-        return "";
-    }
 }

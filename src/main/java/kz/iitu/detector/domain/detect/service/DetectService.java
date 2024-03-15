@@ -22,6 +22,10 @@ public class DetectService {
         return ResponseEntity.ok(new DetectResponse(detect.getId(), detect.getTime(), detect.getContent(), detectPercentsResponse));
     }
 
+    public ResponseEntity<?> findAll(User user) {
+        return ResponseEntity.ok(repository.findAllByUserId(user.getId()));
+    }
+
     private DetectPercentsResponse analyze(String content) {
         return new DetectPercentsResponse(75, 25, 54);
     }
